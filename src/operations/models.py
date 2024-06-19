@@ -1,7 +1,9 @@
-from sqlalchemy import Column, Integer, String, TIMESTAMP
+from sqlalchemy import Column, Integer, String, TIMESTAMP, MetaData
 from sqlalchemy.orm import DeclarativeMeta, declarative_base
 
-from src.auth.models import Base
+
+metadata = MetaData()
+Base: DeclarativeMeta = declarative_base(metadata=metadata)
 
 
 class Operation(Base):
