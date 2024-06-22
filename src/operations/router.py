@@ -1,5 +1,4 @@
 from fastapi import APIRouter, Depends
-from fastapi.encoders import jsonable_encoder
 from sqlalchemy import select, insert
 from sqlalchemy.ext.asyncio import AsyncSession
 
