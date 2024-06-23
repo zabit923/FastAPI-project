@@ -5,9 +5,10 @@ from alembic import context
 import sys
 import os
 
+from src.auth.models import *
+from src.operations.models import *
 from src.config import DB_HOST, DB_NAME, DB_USER, DB_PASS, DB_PORT
-from src.auth.models import metadata as auth_metadata
-from src.operations.models import metadata as operation_metadata
+from src.database import metadata
 
 
 sys.path.append(os.path.join(sys.path[0], 'src'))
@@ -23,7 +24,7 @@ config.set_section_option(section, 'DB_PORT', DB_PORT)
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-target_metadata = [auth_metadata, operation_metadata]
+target_metadata = metadata
 
 
 def run_migrations_offline() -> None:

@@ -1,8 +1,9 @@
-from sqlalchemy import Column, Integer, String, TIMESTAMP, MetaData
+from sqlalchemy import Column, Integer, String, TIMESTAMP
 from sqlalchemy.orm import DeclarativeMeta, declarative_base
 
+from src.database import metadata
 
-metadata = MetaData()
+
 Base: DeclarativeMeta = declarative_base(metadata=metadata)
 
 
