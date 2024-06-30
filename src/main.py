@@ -31,7 +31,12 @@ app.include_router(operation_router)
 app.include_router(tasks_router)
 
 
-@app.on_event('startup')
-async def startup_event():
+async def lifespan(app: FastAPI):
     redis = aioredis.from_url('redis://localhost', encoding='utf8', decode_responses=True)
     FastAPICache.init(RedisBackend(redis), prefix='fastapi-cache')
+    yield
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="127.0.0.1", port=8000)

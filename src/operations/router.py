@@ -13,16 +13,20 @@ router = APIRouter(
 )
 
 
-@router.get("/")
+@router.get("")
 async def get_specific_operations(operation_type: str, session: AsyncSession = Depends(get_async_session)):
-    query = select(Operation).where(Operation.c.type == operation_type)
+    query = select(Operation).where(Operation.type == operation_type)
     result = await session.execute(query)
-    return result.all()
+    return {
+        "status": "success",
+        "data": result.scalars().all(),
+        "details": None
+    }
 
 
-@router.post('/')
+@router.post("")
 async def add_specific_operations(new_operation: OperationCreate, session: AsyncSession = Depends(get_async_session)):
     stmt = insert(Operation).values(**new_operation.dict())
     await session.execute(stmt)
     await session.commit()
-    return {'status': 'success'}
+    return {"status": "success"}
