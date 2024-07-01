@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
 from starlette.middleware.cors import CORSMiddleware
+from fastadmin import fastapi_app as admin_app
 
 from auth.base_config import fastapi_users, auth_backend
 from auth.schemas import UserRead, UserCreate
@@ -17,6 +18,7 @@ from tasks.router import router as tasks_router
 app = FastAPI(
     title='College-messanger'
 )
+app.mount("/admin", admin_app)
 
 
 app.include_router(

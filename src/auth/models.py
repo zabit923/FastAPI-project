@@ -21,7 +21,7 @@ class User(SQLAlchemyBaseUserTable[int], Base):
     __tablename__ = "user"
     id = Column(Integer, primary_key=True, autoincrement=True)
     email = Column(String, nullable=False)
-    username = Column(String, nullable=False)
+    username = Column(String, nullable=False, default="")
     registered_at = Column(TIMESTAMP, default=datetime.utcnow)
     role_id = Column(Integer, ForeignKey("role.id"))
     hashed_password = Column(String(length=1024), nullable=False)
